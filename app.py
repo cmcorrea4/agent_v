@@ -36,7 +36,7 @@ def load_elevenlabs_widget():
     # Renderizar el widget con altura suficiente
     st.components.v1.html(
         elevenlabs_html,
-        height=1000,  # Aumentamos la altura
+        height=1200,  # Aumentamos la altura
         scrolling=True  # Permitimos scroll si es necesario
     )
 
