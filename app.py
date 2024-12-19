@@ -1,102 +1,82 @@
 import streamlit as st
 
-def setup_styling():
-    # Estilos personalizados para una apariencia premium
-    st.markdown("""
-        <style>
-            /* Estilos generales para toda la aplicación */
-            .stApp {
-                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-                color: #ffffff;
-                font-family: 'Helvetica Neue', sans-serif;
-            }
-            
-            /* Contenedor principal centrado */
-            .main-container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 2rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                min-height: 100vh;
-            }
-            
-            /* Estilos para el widget */
-            .widget-container {
-                background: rgba(255, 255, 255, 0.05);
-                border-radius: 20px;
-                backdrop-filter: blur(10px);
-                padding: 2rem;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-                width: 100%;
-                max-width: 800px;
-                margin: 2rem auto;
-            }
-            
-            /* Estilos para el logo y título */
-            .brand {
-                text-align: center;
-                margin-bottom: 2rem;
-            }
-            
-            .brand h1 {
-                color: #gold;
-                font-size: 2.5rem;
-                font-weight: 700;
-                letter-spacing: 2px;
-                margin: 0;
-            }
-            
-            .brand p {
-                color: #cccccc;
-                font-size: 1.1rem;
-                margin-top: 0.5rem;
-            }
-            
-            iframe {
-                border: none !important;
-                min-height: 600px !important;
-                border-radius: 15px;
-                background: rgba(255, 255, 255, 0.02);
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
 def load_elevenlabs_widget():
+    # Configuración inicial de la página
     st.set_page_config(
-        page_title="GETME - Asistente de Servicios Premium",
-        layout="wide",
+        page_title="GETME - Servicios Premium",
+        layout="centered",  # Cambiamos a centered para mejor control
         initial_sidebar_state="collapsed"
     )
     
-    setup_styling()
+    # Aplicamos estilos CSS directamente
+    st.markdown("""
+        <style>
+            /* Reset de estilos base */
+            .stApp {
+                background-color: #1E1E1E !important;
+            }
+            
+            /* Ocultar elementos de Streamlit que no necesitamos */
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            
+            /* Estilos para el contenedor principal */
+            .get-me-container {
+                background-color: #2D2D2D;
+                border-radius: 20px;
+                padding: 20px;
+                margin: 50px auto;
+                max-width: 800px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Estilos para el título */
+            .get-me-title {
+                color: #FFD700;
+                font-family: 'Arial', sans-serif;
+                font-size: 36px;
+                text-align: center;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+            
+            /* Estilos para el widget de ElevenLabs */
+            iframe {
+                border: none !important;
+                border-radius: 10px !important;
+                background: #333333 !important;
+                margin: 0 auto !important;
+                display: block !important;
+                min-height: 600px !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
     
-    # Estructura HTML con diseño mejorado
-    premium_html = """
-        <div class="main-container">
-            <div class="brand">
-                <h1>GETME</h1>
-                <p>Su asistente personal de servicios premium</p>
-            </div>
-            <div class="widget-container">
-                <elevenlabs-convai 
-                    agent-id="gMh8bGtmxS5OxxPwDuKT" 
-                    style="width: 100%; height: 100%; min-height: 600px;">
-                </elevenlabs-convai>
-                <script defer src="https://elevenlabs.io/convai-widget/index.js" type="text/javascript"></script>
-            </div>
+    # Estructura HTML con los elementos centrados
+    st.markdown("""
+        <div class="get-me-container">
+            <h1 class="get-me-title">GETME</h1>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Widget de ElevenLabs
+    elevenlabs_html = """
+        <div style="width: 100%; min-height: 600px; margin: 20px auto;">
+            <elevenlabs-convai 
+                agent-id="gMh8bGtmxS5OxxPwDuKT" 
+                style="width: 100%; height: 600px; border-radius: 10px;">
+            </elevenlabs-convai>
+            <script defer src="https://elevenlabs.io/convai-widget/index.js" type="text/javascript"></script>
         </div>
     """
     
+    # Renderizamos el widget
     st.components.v1.html(
-        premium_html,
-        height=1000,
+        elevenlabs_html,
+        height=650,  # Altura fija para evitar problemas de scroll
         scrolling=False
     )
 
-def main():
-    load_elevenlabs_widget()
-
 if __name__ == "__main__":
-    main()
+    load_elevenlabs_widget()
